@@ -17,6 +17,8 @@ async def main():
     )
 
     tools = await client.get_tools()
+
     print(tools)
+
 
 asyncio.run(main())
