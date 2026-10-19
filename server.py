@@ -1,5 +1,5 @@
 from fastmcp import FastMCP
-import sys
+
 
 mcp = FastMCP("FirstMCPServer")
 
