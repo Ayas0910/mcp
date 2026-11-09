@@ -8,6 +8,10 @@ import os
 
 load_dotenv()
 
+BRANCH = "live_mcp"
+MAIN_BRANCH = "main"
+repo = "live_mcp_demo"
+
 async def call(tool,args):
 
     result = await tool.ainvoke(args)
@@ -24,7 +28,7 @@ async def call(tool,args):
     if isinstance(text,str) and text.startswith("failed"):
         raise RuntimeError(f"{tool.name} {text}")
 
-    return text;
+    return text
 
 async def main():
 
@@ -46,18 +50,27 @@ async def main():
     # pprint.pprint(tools_by_name)
 
     me = await call(tools_by_name["get_me"],{})
+    owner = me["login"]
+
+    target = {"owner": owner, "repo" : repo}
 
     # pprint.pprint(me)
     # print()
     # pprint.pprint(tools_by_name['search_repositories'].args_schema)
 
-    repo = "live_mcp_demo"
+    
 
     await call(tools_by_name["create_repository"],{
         "name": repo,
         "description":"I create this through the mcp tool",
         "private": True,
         "autoInit": True
+    })
+
+    await call(tools_by_name["create_branch"],{
+        **target,
+        "branch": BRANCH,
+        "from_branch": MAIN_BRANCH
     })
 
 asyncio.run(main())
