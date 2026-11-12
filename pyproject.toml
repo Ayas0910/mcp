@@ -10,6 +10,7 @@ requires-python = ">=3.10"
 dependencies = [
     "fastmcp<4",
     "langchain-core>=1.6.3",
+    "langchain-google-genai>=4.4.2",
     "langchain-mcp-adapters>=0.3.1",
     "langchain-openai>=1.6.2",
     "mcp<2",
